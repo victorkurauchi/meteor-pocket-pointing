@@ -27,8 +27,8 @@
 </head>
 
 <body>
-  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-    {{>index}}
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header" id="core-head">
+    {{> Template.dynamic template=main}}
   </div>
 </body>
 
@@ -91,31 +91,63 @@
       </div>
     </header>
     <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+      <a class="mdl-navigation__link" href="">
+        <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home
+      </a>
+      <a class="mdl-navigation__link" href="">
+        <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Funcionários
+      </a>
     </nav>
   </div>
   <main class="mdl-layout__content mdl-color--grey-100">
-    <div class="mdl-grid demo-content">
-      {{> submit_form}}
-
-      <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
-          <thead>
-            <tr>
-              <th>Projeto</th>
-              <th>Descrição</th>
-              <th class="mdl-data-table__cell--non-numeric"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each projects}}
-              {{> project}}
-            {{/each}}
-          </tbody>
-        </table>
-      </div>
+    <div class="mdl-grid demo-content" id="container-blaze">
+      {{> Template.dynamic template=core}}
     </div>
   </main>
+</template>
+
+<template name="dashboard_main_content">
+  {{> company_form}}
+  {{> submit_form}}
+
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
+      <thead>
+        <tr>
+          <th>Projeto</th>
+          <th>Descrição</th>
+          <th>Empresa</th>
+          <th class="mdl-data-table__cell--non-numeric"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each projects}}
+          {{> project}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<template name="users_appointments">
+  <h1>Apontamentos dos usuarios</h1>
+</template>
+
+<template name="company_form">
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <form class="new-company">
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" name="company"  />
+        <label class="mdl-textfield__label">Sua empresa</label>
+      </div>
+
+      <br>
+
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">
+        Salvar
+      </button>
+    </form>
+  </div>
 </template>
 
 <template name="submit_form">
@@ -131,13 +163,17 @@
         <label class="mdl-textfield__label" for="name">Projeto</label>
       </div>
 
+      <br>
+
       <div class="mdl-textfield mdl-js-textfield textfield-demo">
         <input class="mdl-textfield__input" type="text" id="description" name="description"  />
         <label class="mdl-textfield__label" for="description">Detalhes</label>
       </div>
 
-      <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
-        <i class="material-icons">add</i>
+      <br>
+
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">
+        Salvar
       </button>
     </form>
   </div>
@@ -147,10 +183,14 @@
   <tr>
     <td>{{name}}</td>
     <td>{{description}}</td>
+    <td>{{company}}</td>
     <td class="mdl-data-table__cell--non-numeric">
       <button class="mdl-button mdl-js-button mdl-button--icon delete">
         <i class="material-icons">delete</i>
       </button>
+      <a href="/appointments/{{_id}}" class="mdl-button mdl-js-button mdl-button--icon view-appointments">
+        <i class="material-icons">schedule</i>
+      </a>
     </td>
   </tr>
 </template>

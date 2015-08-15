@@ -5,8 +5,9 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-insecure
 accounts-ui
 accounts-password
 accounts-facebook
+kadira:flow-router
+kadira:blaze-layout
+meteorhacks:flow-layout
