@@ -1,0 +1,156 @@
+<head>
+  <title>pocket-pointing</title>
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.min.js"></script>
+
+  <style>
+  #view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+  }
+
+  .mdl-data-table th {
+    text-align: left;
+  }
+
+  .mdl-data-table td {
+    text-align: left;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    {{>index}}
+  </div>
+</body>
+
+<template name="index">
+  {{ #if currentUser}}
+    {{>dashboard}}
+  {{ else }}
+    {{>login}}
+  {{ /if }}
+</template>
+
+<template name="login">
+  <div class="mdl-layout__header-row">
+    <span class="mdl-layout-title">Pocket Pointing</span>
+  </div>
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    {{> loginButtons}}
+  </div>
+</template>
+
+<template name="dashboard">
+  <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Pocket Pointing</span>
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+        <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" id="search" />
+          <label class="mdl-textfield__label" for="search">Enter your query...</label>
+        </div>
+      </div>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+        <i class="material-icons">more_vert</i>
+      </button>
+      <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+        <li class="mdl-menu__item">About</li>
+        <li class="mdl-menu__item">Contact</li>
+        <li class="mdl-menu__item">Legal information</li>
+      </ul>
+    </div>
+  </header>
+  <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+    <header class="demo-drawer-header">
+      <img src="/images/user.jpg" class="demo-avatar">
+      <div class="demo-avatar-dropdown">
+        <span>{{currentUser._id}}</span>
+        <div class="mdl-layout-spacer"></div>
+        <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+          <i class="material-icons" role="presentation">arrow_drop_down</i>
+          <span class="visuallyhidden">Accounts</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+          <li class="mdl-menu__item">hello@example.com</li>
+          <li class="mdl-menu__item">info@example.com</li>
+          <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+        </ul>
+      </div>
+    </header>
+    <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content mdl-color--grey-100">
+    <div class="mdl-grid demo-content">
+      {{> submit_form}}
+
+      <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
+          <thead>
+            <tr>
+              <th>Projeto</th>
+              <th>Descrição</th>
+              <th class="mdl-data-table__cell--non-numeric"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each projects}}
+              {{> project}}
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</template>
+
+<template name="submit_form">
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <!-- <label  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+      <input type="checkbox" checked="{{checked}}" class="mdl-checkbox__input hide-completed" />
+      <span class="mdl-checkbox__label text">Esconder projetos concluidos</span>
+    </label> -->
+
+    <form class="new-project">
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" id="name" name="name"  />
+        <label class="mdl-textfield__label" for="name">Projeto</label>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" id="description" name="description"  />
+        <label class="mdl-textfield__label" for="description">Detalhes</label>
+      </div>
+
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+        <i class="material-icons">add</i>
+      </button>
+    </form>
+  </div>
+</template>
+
+<template name="project">
+  <tr>
+    <td>{{name}}</td>
+    <td>{{description}}</td>
+    <td class="mdl-data-table__cell--non-numeric">
+      <button class="mdl-button mdl-js-button mdl-button--icon delete">
+        <i class="material-icons">clear</i>
+      </button>
+    </td>
+  </tr>
+</template>
