@@ -1,3 +1,5 @@
+Meteor.subscribe("companies");
+
 Template.company_form.events({
   "submit .new-company": function(event) {
     event.preventDefault();

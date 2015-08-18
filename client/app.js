@@ -1,8 +1,5 @@
 BlazeLayout.setRoot("#core-head");
 
-Meteor.subscribe("projects");
-Meteor.subscribe("companies");
-
 Template.body.helpers({
 });
 

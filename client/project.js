@@ -1,3 +1,5 @@
+Meteor.subscribe("projects");
+
 Template.submit_form.events({
   "submit .new-project": function (event) {
     // Prevent default browser form submit

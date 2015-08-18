@@ -91,10 +91,10 @@
       </div>
     </header>
     <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-      <a class="mdl-navigation__link" href="">
+      <a class="mdl-navigation__link" href="/">
         <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home
       </a>
-      <a class="mdl-navigation__link" href="">
+      <a class="mdl-navigation__link" href="/company/employees">
         <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Funcionários
       </a>
     </nav>
@@ -130,7 +130,55 @@
 </template>
 
 <template name="users_appointments">
-  <h1>Apontamentos dos usuarios</h1>
+  <h1>Apontamentos dos usuários</h1>
+</template>
+
+<template name="dashboard_employees">
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <form class="new-employee">
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" name="name"  />
+        <label class="mdl-textfield__label">Funcionário</label>
+      </div>
+
+      <br>
+
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" name="email"  />
+        <label class="mdl-textfield__label">Email</label>
+      </div>
+
+      <br>
+
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="password" name="password"  />
+        <label class="mdl-textfield__label">Senha (será modificada no login)</label>
+      </div>
+
+      <br>
+
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">
+        Salvar
+      </button>
+    </form>
+  </div>
+
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
+      <thead>
+        <tr>
+          <th>Funcionário</th>
+          <th>Email</th>
+          <th class="mdl-data-table__cell--non-numeric"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each employees}}
+          {{> list_employees}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <template name="company_form">
@@ -188,9 +236,92 @@
       <button class="mdl-button mdl-js-button mdl-button--icon delete">
         <i class="material-icons">delete</i>
       </button>
-      <a href="/appointments/{{_id}}" class="mdl-button mdl-js-button mdl-button--icon view-appointments">
+      <a href="/project/{{_id}}/appointments" class="mdl-button mdl-js-button mdl-button--icon view-appointments">
         <i class="material-icons">schedule</i>
       </a>
     </td>
   </tr>
+</template>
+
+<template name="list_employees">
+  <tr>
+    <td>{{name}}</td>
+    <td>{{email}}</td>
+    <td class="mdl-data-table__cell--non-numeric">
+      <button class="mdl-button mdl-js-button mdl-button--icon delete">
+        <i class="material-icons">delete</i>
+      </button>
+      <a href="/user/{{_id}}/appointments" class="mdl-button mdl-js-button mdl-button--icon view-appointments">
+        <i class="material-icons">schedule</i>
+      </a>
+    </td>
+  </tr>
+</template>
+
+<template name="user_calendar">
+
+  <!-- Wide card with share menu button -->
+  <style>
+    .demo-card-wide.mdl-card {
+      width: 512px;
+    }
+    .demo-card-wide > .mdl-card__title {
+      color: #fff;
+      height: 176px;
+      background: url('http://www.getmdl.io/assets/demos/welcome_card.jpg') center / cover;
+    }
+    .demo-card-wide > .mdl-card__menu {
+      color: #fff;
+    }
+  </style>
+
+  <div class="mdl-card mdl-shadow--2dp demo-card-wide">
+    <div class="mdl-card__title">
+      {{#if Template.subscriptionsReady}}
+        {{#with employee}}
+          <h2 class="mdl-card__title-text">Welcome, {{name}}</h2>
+        {{/with}}
+      {{else}}
+          <h2 class="mdl-card__title-text">Loading...</h2>
+      {{/if}}
+    </div>
+    <div class="mdl-card__supporting-text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Mauris sagittis pellentesque lacus eleifend lacinia...
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        Get Started
+      </a>
+    </div>
+    <div class="mdl-card__menu">
+      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">share</i>
+      </button>
+    </div>
+  </div>
+
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
+      <thead>
+        <tr>
+          <th>Entrada</th>
+          <th>Almoço</th>
+          <th>Volta almoço</th>
+          <th>Saída</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each user_calendar_day}}
+          <tr>
+            <td>{{checkin}}</td>
+            <td>{{breakin}}</td>
+            <td>{{breakout}}</td>
+            <td>{{checkout}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
 </template>
