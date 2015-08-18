@@ -11,6 +11,11 @@ Meteor.publish("api/employees", function () {
   return Employees.find();
 });
 
+// login
+// Projects
+// project id
+// appointments by user in project
+
 Meteor.method("add-numbers", function (a, b) {
   return a + b;
 }, {
