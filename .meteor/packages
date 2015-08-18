@@ -12,3 +12,4 @@ kadira:flow-router
 kadira:blaze-layout
 meteorhacks:flow-layout
 simple:rest
+simple:json-routes
