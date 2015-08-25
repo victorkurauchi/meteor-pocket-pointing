@@ -13,3 +13,5 @@ kadira:blaze-layout
 meteorhacks:flow-layout
 simple:rest
 simple:json-routes
+jparker:crypto-md5
+momentjs:moment

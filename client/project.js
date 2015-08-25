@@ -2,10 +2,8 @@ Meteor.subscribe("projects");
 
 Template.submit_form.events({
   "submit .new-project": function (event) {
-    // Prevent default browser form submit
     event.preventDefault();
 
-    // Get value from form element
     var form = event.target;
     var name = form.name.value;
     var description = form.description.value;
@@ -16,7 +14,6 @@ Template.submit_form.events({
 
     Meteor.call("addProject", project);
 
-    // Clear form
     name = "";
     description = "";
   },

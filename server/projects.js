@@ -1,8 +1,17 @@
 Meteor.methods({
   addProject: function (project) {
     // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
+    var _userId = Meteor.userId(),
+      company;
+
+    if (! _userId) {
       throw new Meteor.Error("not-authorized");
+    }
+
+    company = Companies.findOne({owner: _userId});
+
+    if (! company) {
+      throw new Meteor.Error("You can't insert a project without being owner of a company.");
     }
 
     Projects.insert({
@@ -11,8 +20,8 @@ Meteor.methods({
       createdAt: new Date(),
       owner: Meteor.userId(),
       username: Meteor.user().username,
-      company: 'Ornitorrinko',
-      companydId: 1
+      company: company.name,
+      companyId: company._id
     });
   },
   deleteProject: function (id) {

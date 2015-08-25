@@ -12,60 +12,87 @@ Meteor.publish("api/employees", function () {
   return Employees.find();
 });
 
-// projects
-Meteor.publish("api/projects", function () {
-  return Projects.find();
-});
-
-Meteor.method("api/projects/:id", function (id) {
-  return Projects.findOne({_id: id});
-}, {
-  url: "api/projects/:id",
-  getArgsFromRequest: function (request) {
-    // Let's say we want this function to accept a form-encoded request with
-    // fields named `a` and `b`.
-    var content = request.params;
-
-    console.log(content);
-
-    // Since form enconding doesn't distinguish numbers and strings, we need
-    // to parse it manually
-    return [ content.id ];
-  },
-  httpMethod: "GET"
-})
-
-Meteor.method("api/appointments/user/:userid", function(id) {
-
-});
-
 // appointments
 Meteor.method("api/appointments/project/:projectid/user/:userid", function(projectId, userId) {
   return Appointments.find({projectId: projectId, userId: userId});
 });
 
-Meteor.method("api/appointments/add", function (a, b) {
-  var result = {
-    sum: a + b
-  };
-  return result;
+Meteor.method("api/appointments/add", function (appointment) {
+  if (! appointment.checkin || ! appointment.userId) {
+    throw new Meteor.Error("error",
+      "Informe pelo menos seu checkin :)");
+  }
+
+  return Meteor.call("addAppointment", appointment);
+
 }, {
   url: "api/appointments/add",
   getArgsFromRequest: function (request) {
-    console.log("damn bro...");
-    // Let's say we want this function to accept a form-encoded request with
-    // fields named `a` and `b`.
     var content = request.body;
-
-    console.log(content);
-
-    // Since form enconding doesn't distinguish numbers and strings, we need
-    // to parse it manually
-    return [ parseInt(content.a, 10), parseInt(content.b, 10) ];
+    return [ content ];
   }
 });
 
+Meteor.method("api/appointments/update", function (appointment) {
+  if (! appointment._id || ! appointment.userId) {
+    throw new Meteor.Error("error",
+      "Informe o apontamento :)");
+  }
+
+  return Meteor.call("updateAppointment", appointment);
+}, {
+  url: "api/appointments/update",
+  getArgsFromRequest: function (request) {
+    var content = request.body;
+    return [ content ];
+  },
+  httpMethod: "POST"
+});
+
 // login
-// Projects
-// project id
-// appointments by user in project
+Meteor.method("api/users/login", function (email, password) {
+  var user = Employees.findOne({ email: email, password: password});
+  var session;
+
+  if (! user) {
+    throw new Meteor.Error("not-found",
+      "User with that username or email address not found.");
+  }
+
+  session = new Date() + user._id;
+  session = session.toString();
+  user.sessionId = CryptoJS.MD5(session).toString();
+
+  return user;
+}, {
+  url: "api/users/login",
+  getArgsFromRequest: function (request) {
+    var content = request.body;
+    return [ content.email, content.password ];
+  },
+  httpMethod: "POST"
+});
+
+// projects
+Meteor.method("api/projects/:id", function (id) {
+  return Projects.findOne({_id: id});
+}, {
+  url: "api/projects/:id",
+  getArgsFromRequest: function (request) {
+    var content = request.params;
+    return [ content.id ];
+  },
+  httpMethod: "GET"
+});
+
+Meteor.method("api/appointments/user/:userid", function(id) {
+
+});
+
+// get projects where companyId from user matches.
+Meteor.publish("api/company/id/projects", function (id) {
+  return Projects.find({companyId: id});
+}, {
+  url: "api/company/:0/projects",
+  httpMethod: "GET"
+});

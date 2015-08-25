@@ -52,7 +52,7 @@
 <template name="dashboard">
   <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Pocket Pointing</span>
+      <span class="mdl-layout-title">Pocket Pointing {{companyName}}</span>
       <div class="mdl-layout-spacer"></div>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
         <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
@@ -275,33 +275,21 @@
     }
   </style>
 
-  <div class="mdl-card mdl-shadow--2dp demo-card-wide">
-    <div class="mdl-card__title">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
       {{#if Template.subscriptionsReady}}
         {{#with employee}}
-          <h2 class="mdl-card__title-text">Welcome, {{name}}</h2>
+          <h2 class="mdl-card__title-text">Apontamentos {{name}}</h2>
+          <p>
+            Agosto
+          </p>
         {{/with}}
       {{else}}
-          <h2 class="mdl-card__title-text">Loading...</h2>
+          <h2 class="mdl-card__title-text">Aguarde...</h2>
       {{/if}}
-    </div>
-    <div class="mdl-card__supporting-text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Mauris sagittis pellentesque lacus eleifend lacinia...
-    </div>
-    <div class="mdl-card__actions mdl-card--border">
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-        Get Started
-      </a>
-    </div>
-    <div class="mdl-card__menu">
-      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        <i class="material-icons">share</i>
-      </button>
     </div>
   </div>
 
-  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
     <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
       <thead>
         <tr>
@@ -309,19 +297,22 @@
           <th>Almoço</th>
           <th>Volta almoço</th>
           <th>Saída</th>
+          <th>Total Horas</th>
+          <th>Projeto</th>
         </tr>
       </thead>
       <tbody>
         {{#each user_calendar_day}}
           <tr>
-            <td>{{checkin}}</td>
-            <td>{{breakin}}</td>
-            <td>{{breakout}}</td>
-            <td>{{checkout}}</td>
+            <td>{{formatDate checkin}}</td>
+            <td>{{formatDate breakin}}</td>
+            <td>{{formatDate breakout}}</td>
+            <td>{{formatDate checkout}}</td>
+            <td>{{calculateWorkedHours checkin breakin breakout checkout}}</td>
+            <td>{{projectName}}</td>
           </tr>
         {{/each}}
       </tbody>
     </table>
-  </div>
 
 </template>
