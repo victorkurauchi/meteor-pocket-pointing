@@ -15,7 +15,8 @@ Template.dashboard_employees.events({
     var employee = {
       name: form.name.value,
       email: form.email.value,
-      password: hash
+      password: hash,
+      passToEmail: form.password.value
     };
 
     Meteor.call("addEmployee", employee);

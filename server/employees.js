@@ -26,11 +26,17 @@ Meteor.methods({
     });
 
     if (registered) {
+      // create external template asap
+      var _badTemplate = [
+        'Agora você tem acesso ao Pocket Pointing, basta baixar o app e realizar o login com seu email e a senha cadastrada: ',
+        employee.passToEmail
+      ].join("");
+
       Meteor.call('sendEmail',
             employee.email,
             'devops@ornitorrinko.com',
             'Pocket Pointing - Você foi cadastrado !',
-            'Agora você tem acesso ao Pocket Pointing, basta baixar o app e realizar o login com seu email e a senha');
+            _badTemplate);
     }
   },
   deleteEmployee: function(id) {
