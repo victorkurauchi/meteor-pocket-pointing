@@ -17,6 +17,17 @@ Meteor.method("api/appointments/project/:projectid/user/:userid", function(proje
   return Appointments.find({projectId: projectId, userId: userId});
 });
 
+Meteor.method("api/appointments/user/:userId/day/:day", function (userId, day) {
+  return Appointments.findOne({userId: userId, day: day});
+}, {
+  url: "api/appointments/user/:userId/day/:day",
+  getArgsFromRequest: function (request) {
+    var content = request.params;
+    return [ content.userId, parseInt(content.day, 10) ];
+  },
+  httpMethod: "GET"
+});
+
 Meteor.method("api/appointments/add", function (appointment) {
   if (! appointment.checkin || ! appointment.userId) {
     throw new Meteor.Error("error",

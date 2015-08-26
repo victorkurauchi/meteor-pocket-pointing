@@ -14,6 +14,7 @@ Meteor.methods({
       projectName: appointment.projectName,
       companyId: appointment.companyId,
       createdAt: new Date(),
+      day: new Date().getDate(),
       updatedAt: appointment.updatedAt || null
     });
 
