@@ -52,7 +52,7 @@
 <template name="dashboard">
   <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Pocket Pointing {{companyName}}</span>
+      <span class="mdl-layout-title">Pocket Pointing</span>
       <div class="mdl-layout-spacer"></div>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
         <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
@@ -181,6 +181,21 @@
   </div>
 </template>
 
+<template name="list_employees">
+  <tr>
+    <td>{{name}}</td>
+    <td>{{email}}</td>
+    <td class="mdl-data-table__cell--non-numeric">
+      <button class="mdl-button mdl-js-button mdl-button--icon delete">
+        <i class="material-icons">delete</i>
+      </button>
+      <a href="/user/{{_id}}/appointments" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">schedule</i>
+      </a>
+    </td>
+  </tr>
+</template>
+
 <template name="company_form">
   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
     <form class="new-company">
@@ -237,21 +252,6 @@
         <i class="material-icons">delete</i>
       </button>
       <a href="/project/{{_id}}/appointments" class="mdl-button mdl-js-button mdl-button--icon view-appointments">
-        <i class="material-icons">schedule</i>
-      </a>
-    </td>
-  </tr>
-</template>
-
-<template name="list_employees">
-  <tr>
-    <td>{{name}}</td>
-    <td>{{email}}</td>
-    <td class="mdl-data-table__cell--non-numeric">
-      <button class="mdl-button mdl-js-button mdl-button--icon delete">
-        <i class="material-icons">delete</i>
-      </button>
-      <a href="/user/{{_id}}/appointments" class="mdl-button mdl-js-button mdl-button--icon view-appointments">
         <i class="material-icons">schedule</i>
       </a>
     </td>

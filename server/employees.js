@@ -10,10 +10,10 @@ Meteor.methods({
     company = Companies.findOne({owner: _userId});
 
     if (! company) {
-      throw new Meteor.Error("You can't insert a project without being owner of a company.");
+      throw new Meteor.Error("You can't create a employee without being owner of a company.");
     }
 
-    Employees.insert({
+    var registered = Employees.insert({
       name: employee.name,
       email: employee.email,
       password: employee.password,
@@ -24,6 +24,17 @@ Meteor.methods({
       changePasswordOnLogin: true,
       projectsIn: []
     });
+
+    if (registered) {
+      Meteor.call('sendEmail',
+            employee.email,
+            'devops@ornitorrinko.com',
+            'Pocket Pointing - Você foi cadastrado !',
+            'Agora você tem acesso ao Pocket Pointing, basta baixar o app e realizar o login com seu email e a senha');
+    }
+  },
+  deleteEmployee: function(id) {
+    Employees.remove(id);
   }
 });
 

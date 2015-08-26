@@ -26,6 +26,12 @@ Template.dashboard_employees.events({
   }
 });
 
+Template.list_employees.events({
+  "click .delete": function () {
+    Meteor.call("deleteEmployee", this._id);
+  }
+})
+
 Template.user_calendar.onCreated(function() {
   var self = this;
   self.autorun(function() {
