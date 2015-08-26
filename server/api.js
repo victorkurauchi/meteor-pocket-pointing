@@ -17,13 +17,13 @@ Meteor.method("api/appointments/project/:projectid/user/:userid", function(proje
   return Appointments.find({projectId: projectId, userId: userId});
 });
 
-Meteor.method("api/appointments/user/:userId/day/:day", function (userId, day) {
-  return Appointments.findOne({userId: userId, day: day});
+Meteor.method("api/appointments/user/:userId/day/:day/project/:projectId", function (userId, day, projectId) {
+  return Appointments.findOne({userId: userId, day: day, projectId: projectId});
 }, {
-  url: "api/appointments/user/:userId/day/:day",
+  url: "api/appointments/user/:userId/day/:day/project/:projectId",
   getArgsFromRequest: function (request) {
     var content = request.params;
-    return [ content.userId, parseInt(content.day, 10) ];
+    return [ content.userId, parseInt(content.day, 10), content.projectId ];
   },
   httpMethod: "GET"
 });

@@ -36,21 +36,30 @@ Template.user_calendar.onCreated(function() {
 });
 
 Template.registerHelper('formatDate', function(date) {
-  return moment(date).format('DD/MM/YYYY HH:mm:ss');
+  if (date) {
+    return moment(date).format('DD/MM/YYYY HH:mm:ss');
+  } else {
+    return '';
+  }
 });
 
 Template.registerHelper('calculateWorkedHours', function(checkin, breakin, breakout, checkout) {
-  var sum;
 
-  checkin = moment(checkin);
-  breakin = moment(breakin);
-  breakout = moment(breakout);
-  checkout = moment(checkout);
+  if (checkin && breakin && breakout && checkout) {
+    var sum;
 
-  sum = checkout.diff(checkin, 'hours');
-  sum = sum - (breakout.diff(breakin, 'hours'));
+    checkin = moment(checkin);
+    breakin = moment(breakin);
+    breakout = moment(breakout);
+    checkout = moment(checkout);
 
-  return sum;
+    sum = checkout.diff(checkin, 'hours');
+    sum = sum - (breakout.diff(breakin, 'hours'));
+
+    return sum;
+  } else {
+    return 0;
+  }
 });
 
 Template.user_calendar.helpers({
