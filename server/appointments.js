@@ -23,18 +23,22 @@ Meteor.methods({
   },
 
   updateAppointment: function(data) {
-    var updatedFields = {}
+    var updatedFields = {};
+    var id;
     updatedFields.updatedAt = new Date();
 
     if (! data._id) {
       throw new Meteor.Error("Informe pelo menos seu checkin :) ");
+    } else {
+      id = data._id;
+      delete data._id;
     }
 
     for (var x in data) {
       updatedFields[x] = data[x];
     }
 
-    var _updated = Appointments.findOneAndUpdate({_id: data._id}, updatedFields);
+    var _updated = Appointments.update({_id: id}, {$set: updatedFields});
     var result = {updated: _updated};
 
     return result;
