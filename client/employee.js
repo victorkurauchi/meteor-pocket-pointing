@@ -53,17 +53,21 @@ Template.registerHelper('formatDate', function(date) {
 Template.registerHelper('calculateWorkedHours', function(checkin, breakin, breakout, checkout) {
 
   if (checkin && breakin && breakout && checkout) {
-    var sum;
+    var sum,
+      tempTime,
+      total;
 
     checkin = moment(checkin);
     breakin = moment(breakin);
     breakout = moment(breakout);
     checkout = moment(checkout);
 
-    sum = checkout.diff(checkin, 'hours');
-    sum = sum - (breakout.diff(breakin, 'hours'));
+    sum = checkout.diff(checkin);
+    sum = sum - (breakout.diff(breakin));
+    tempTime = moment.duration(sum);
+    total = tempTime.hours() + ":" + tempTime.minutes();
 
-    return sum;
+    return total;
   } else {
     return 0;
   }
