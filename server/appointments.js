@@ -34,7 +34,7 @@ Meteor.methods({
       updatedFields[x] = data[x];
     }
 
-    var _updated = Appointments.update({_id: data._id}, {$set: updatedFields});
+    var _updated = Appointments.findOneAndUpdate({_id: data._id}, updatedFields);
     var result = {updated: _updated};
 
     return result;
