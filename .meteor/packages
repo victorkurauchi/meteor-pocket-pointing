@@ -16,3 +16,4 @@ simple:json-routes
 jparker:crypto-md5
 momentjs:moment
 email
+reactive-var

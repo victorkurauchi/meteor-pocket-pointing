@@ -1,0 +1,28 @@
+<template name="submit_form">
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <!-- <label  class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+      <input type="checkbox" checked="{{checked}}" class="mdl-checkbox__input hide-completed" />
+      <span class="mdl-checkbox__label text">Esconder projetos concluidos</span>
+    </label> -->
+
+    <form class="new-project">
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" id="name" name="name"  />
+        <label class="mdl-textfield__label" for="name">Projeto</label>
+      </div>
+
+      <br>
+
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" id="description" name="description"  />
+        <label class="mdl-textfield__label" for="description">Detalhes</label>
+      </div>
+
+      <br>
+
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">
+        Salvar
+      </button>
+    </form>
+  </div>
+</template>

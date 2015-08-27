@@ -1,0 +1,62 @@
+<template name="user_calendar">
+
+  <!-- Wide card with share menu button -->
+  <style>
+    .demo-card-wide.mdl-card {
+      width: 512px;
+    }
+    .demo-card-wide > .mdl-card__title {
+      color: #fff;
+      height: 176px;
+      background: url('http://www.getmdl.io/assets/demos/welcome_card.jpg') center / cover;
+    }
+    .demo-card-wide > .mdl-card__menu {
+      color: #fff;
+    }
+  </style>
+
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+      {{#if Template.subscriptionsReady}}
+        {{#with employee}}
+          <h2 class="mdl-card__title-text">Apontamentos {{name}}</h2>
+          <p>
+            {{currentMonth}}
+          </p>
+        {{/with}}
+      {{else}}
+          <h2 class="mdl-card__title-text">Aguarde...</h2>
+      {{/if}}
+    </div>
+  </div>
+
+  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
+    <thead>
+      <tr>
+        <th>Entrada</th>
+        <th>Almoço</th>
+        <th>Volta almoço</th>
+        <th>Saída</th>
+        <th>Total Horas</th>
+        <th>Projeto</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each user_calendar_day}}
+        <tr>
+          <td>{{formatDate checkin}}</td>
+          <td>{{formatDate breakin}}</td>
+          <td>{{formatDate breakout}}</td>
+          <td>{{formatDate checkout}}</td>
+          <td>{{calculateWorkedHours checkin breakin breakout checkout}}</td>
+          <td>{{projectName}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <button type="button" name="button">clickme</button>
+
+  <span>Total trabalhado no mês até hoje: {{monthlyHours}}</span>
+
+</template>

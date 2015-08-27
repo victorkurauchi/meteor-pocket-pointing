@@ -1,0 +1,51 @@
+<template name="users_appointments">
+  <h1>Apontamentos dos usuários</h1>
+</template>
+
+<template name="dashboard_employees">
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <form class="new-employee">
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" name="name"  />
+        <label class="mdl-textfield__label">Funcionário</label>
+      </div>
+
+      <br>
+
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="text" name="email"  />
+        <label class="mdl-textfield__label">Email</label>
+      </div>
+
+      <br>
+
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <input class="mdl-textfield__input" type="password" name="password"  />
+        <label class="mdl-textfield__label">Senha (será modificada no login)</label>
+      </div>
+
+      <br>
+
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">
+        Salvar
+      </button>
+    </form>
+  </div>
+
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
+      <thead>
+        <tr>
+          <th>Funcionário</th>
+          <th>Email</th>
+          <th class="mdl-data-table__cell--non-numeric"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each employees}}
+          {{> list_employees}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>

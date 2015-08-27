@@ -1,0 +1,14 @@
+<template name="list_employees">
+  <tr>
+    <td>{{name}}</td>
+    <td>{{email}}</td>
+    <td class="mdl-data-table__cell--non-numeric">
+      <button class="mdl-button mdl-js-button mdl-button--icon delete">
+        <i class="material-icons">delete</i>
+      </button>
+      <a href="/user/{{_id}}/appointments" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">schedule</i>
+      </a>
+    </td>
+  </tr>
+</template>

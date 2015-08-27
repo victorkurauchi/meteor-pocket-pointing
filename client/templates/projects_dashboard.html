@@ -1,0 +1,15 @@
+<template name="project">
+  <tr>
+    <td>{{name}}</td>
+    <td>{{description}}</td>
+    <td>{{company}}</td>
+    <td class="mdl-data-table__cell--non-numeric">
+      <button class="mdl-button mdl-js-button mdl-button--icon delete">
+        <i class="material-icons">delete</i>
+      </button>
+      <a href="/project/{{_id}}/appointments" class="mdl-button mdl-js-button mdl-button--icon view-appointments">
+        <i class="material-icons">schedule</i>
+      </a>
+    </td>
+  </tr>
+</template>
