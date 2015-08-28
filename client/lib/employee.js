@@ -1,12 +1,14 @@
 Meteor.subscribe("employees");
 
-// reactivity
-var getMonthlyHours = function () {
-  if (monthlyHours) {
-    return monthlyHours.get();
-  } else {
-    return null;
-  }
+var _workedMonthly = 0;
+var calculateMonthly = function(timestamp) {
+  var _duration,
+    display;
+  _duration = _workedMonthly + timestamp;
+  _workedMonthly = moment.duration(_duration);
+
+  display = _workedMonthly.hours() + " horas e " + _workedMonthly.minutes() + " minutos";
+  Session.set("workedMonthly", display);
 };
 
 Template.dashboard_employees.helpers({
@@ -61,13 +63,6 @@ Template.registerHelper('formatDate', function(date) {
 });
 
 Template.registerHelper('calculateWorkedHours', function(checkin, breakin, breakout, checkout) {
-  // if (monthlyHours) {
-  //   console.log("adding..");
-  //   var x = monthlyHours.get();
-  //   x = x + total;
-  //   monthlyHours.set(x);
-  //   return monthlyHours.get();
-  // }
   if (checkin && breakin && breakout && checkout) {
     var sum,
       tempTime,
@@ -81,10 +76,9 @@ Template.registerHelper('calculateWorkedHours', function(checkin, breakin, break
     sum = checkout.diff(checkin);
     sum = sum - (breakout.diff(breakin));
     tempTime = moment.duration(sum);
-    total = tempTime.hours() + ":" + tempTime.minutes();
+    total = tempTime.hours() + ":" + tempTime.minutes() + ":" + tempTime.seconds();
 
-    console.log( 'called');
-    // Template.instance().monthlyHours.set(Template.instance().monthlyHours.get() + total);
+    calculateMonthly(tempTime);
 
     return total;
   } else {
@@ -92,11 +86,15 @@ Template.registerHelper('calculateWorkedHours', function(checkin, breakin, break
   }
 });
 
+Template.user_calendar.onRendered(function(){
+  _workedMonthly = 0;
+});
+
 Template.user_calendar.events({
   'click button': function (event, template) {
-      // increment the counter when button is clicked
-      template.monthlyHours.set(template.monthlyHours.get() + 1);
-    }
+    // increment the counter when button is clicked
+    template.monthlyHours.set(template.monthlyHours.get() + 1);
+  }
 });
 
 Template.user_calendar.helpers({
@@ -106,15 +104,13 @@ Template.user_calendar.helpers({
     return employee;
   },
   user_calendar_day: function() {
-    var userid = FlowRouter.getParam('id');
-    return Appointments.find({userId: userid});
+    return Appointments.find({userId: FlowRouter.getParam('id')});
   },
   currentMonth: function() {
     return moment().format('MMMM');
   },
   monthlyHours: function() {
-    console.log("checking,,");
-    return Template.instance().monthlyHours.get();
+    return Session.get("workedMonthly") || 0;
   },
   isReady: function(sub) {
     if(sub) {
