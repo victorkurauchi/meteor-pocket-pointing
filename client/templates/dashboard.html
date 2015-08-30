@@ -1,79 +1,159 @@
 <template name="dashboard">
-  <header class="demo-header mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
-    <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Pocket Pointing - {{reactiveCompany}}</span>
-      <div class="mdl-layout-spacer"></div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-        <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-          <i class="material-icons">search</i>
-        </label>
-        <div class="mdl-textfield__expandable-holder">
-          <input class="mdl-textfield__input" type="text" id="search" />
-          <label class="mdl-textfield__label" for="search">Enter your query...</label>
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+          <div class="navbar nav_title" style="border: 0;">
+            <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>{{reactiveCompany}}</span></a>
+          </div>
+          <div class="clearfix"></div>
+          <div class="profile">
+            <div class="profile_pic">
+              <img src="/images/img.jpg" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+              <span>Olá,</span>
+              <h2>{{userSubstr}}</h2>
+            </div>
+          </div>
+          <br />
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              <ul class="nav side-menu">
+                <li>
+                  <a href="/"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li>
+                  <a href="/company/employees"><i class="fa fa-male"></i>Funcionários</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="Settings">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Lock">
+              <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Logout" class="logout">
+              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+          </div>
         </div>
       </div>
-      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-        <i class="material-icons">more_vert</i>
-      </button>
-      <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-        <li class="mdl-menu__item">About</li>
-        <li class="mdl-menu__item">Contact</li>
-        <li class="mdl-menu__item">Legal information</li>
-      </ul>
-    </div>
-  </header>
-  <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-    <header class="demo-drawer-header">
-      <img src="/images/user.jpg" class="demo-avatar">
-      <div class="demo-avatar-dropdown">
-        <span>{{currentUser._id}}</span>
-        <div class="mdl-layout-spacer"></div>
-        <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-          <i class="material-icons" role="presentation">arrow_drop_down</i>
-          <span class="visuallyhidden">Accounts</span>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-          <li class="mdl-menu__item"><i class="material-icons">perm_identity</i> Perfil</li>
-          <li class="mdl-menu__item"><i class="material-icons">settings</i> Configurações</li>
-          <li class="mdl-menu__item"> <i class="material-icons">power_settings_new</i> Sair</li>
-        </ul>
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav class="" role="navigation">
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="/images/img.jpg" alt="">{{userEmail}}
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+                  <li><a href="javascript:;">  Profile</a>
+                  </li>
+                  <li>
+                    <a href="javascript:;">
+                      <span class="badge bg-red pull-right">50%</span>
+                      <span>Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:;">Help</a>
+                  </li>
+                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  </li>
+                </ul>
+              </li>
+              <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="badge bg-green">6</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
+                  <li>
+                    <a>
+                      <span class="image">
+                        <img src="/images/img.jpg" alt="Profile Image" />
+                      </span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image">
+                        <img src="/images/img.jpg" alt="Profile Image" />
+                      </span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image">
+                        <img src="images/img.jpg" alt="Profile Image" />
+                      </span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image">
+                        <img src="images/img.jpg" alt="Profile Image" />
+                      </span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
+                      <a>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-    </header>
-    <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-      <a class="mdl-navigation__link" href="/">
-        <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home
-      </a>
-      <a class="mdl-navigation__link" href="/company/employees">
-        <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Funcionários
-      </a>
-    </nav>
-  </div>
-  <main class="mdl-layout__content mdl-color--grey-100">
-    <div class="mdl-grid demo-content" id="container-blaze">
-      {{> Template.dynamic template=core}}
+      <div class="right_col" role="main">
+        <div class="">
+          {{> Template.dynamic template=core}}
+        </div>
+      </div>
     </div>
-  </main>
-</template>
-
-<template name="dashboard_main_content">
-  {{> company_form}}
-  {{> submit_form}}
-
-  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
-      <thead>
-        <tr>
-          <th>Projeto</th>
-          <th>Descrição</th>
-          <th>Empresa</th>
-          <th class="mdl-data-table__cell--non-numeric"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each projects}}
-          {{> project}}
-        {{/each}}
-      </tbody>
-    </table>
   </div>
 </template>

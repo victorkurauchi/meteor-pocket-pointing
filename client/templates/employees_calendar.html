@@ -30,34 +30,62 @@
     </div>
   </div>
 
-  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
-    <thead>
-      <tr>
-        <th>Entrada</th>
-        <th>Almoço</th>
-        <th>Volta almoço</th>
-        <th>Saída</th>
-        <th>Total Horas</th>
-        <th>Projeto</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each user_calendar_day}}
-        <tr>
-          <td>{{formatDate checkin}}</td>
-          <td>{{formatDate breakin}}</td>
-          <td>{{formatDate breakout}}</td>
-          <td>{{formatDate checkout}}</td>
-          <td>{{calculateWorkedHours checkin breakin breakout checkout}}</td>
-          <td>{{projectName}}</td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="x_panel">
+      <div class="x_title">
+          <h2>Projetos ativos</h2>
+          <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                  </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+          </ul>
+          <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
 
-  <div class="">
-    <h5>Total trabalhado no mês até hoje: {{monthlyHours}}</h5>
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Entrada</th>
+                <th>Almoço</th>
+                <th>Volta almoço</th>
+                <th>Saída</th>
+                <th>Total Horas</th>
+                <th>Projeto</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {{#each user_calendar_day}}
+                <tr>
+                  <td>{{formatDate checkin}}</td>
+                  <td>{{formatDate breakin}}</td>
+                  <td>{{formatDate breakout}}</td>
+                  <td>{{formatDate checkout}}</td>
+                  <td>{{calculateWorkedHours checkin breakin breakout checkout}}</td>
+                  <td>{{projectName}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+
+        </table>
+
+      </div>
+    </div>
   </div>
 
+  <div class="row">
+    <h5>Total trabalhado no mês até hoje: {{monthlyHours}}</h5>
+  </div>
 
 </template>

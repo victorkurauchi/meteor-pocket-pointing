@@ -1,8 +1,31 @@
 <template name="login">
-  <div class="mdl-layout__header-row">
-    <span class="mdl-layout-title">Pocket Pointing created with <i class="material-icons">mood</i> by OrnitorrinkoLabs.</span>
+  <style media="screen">
+    body {
+      background:#F7F7F7;
+    }
+  </style>
+  <div class="">
+      <a class="hiddenanchor" id="toregister"></a>
+      <a class="hiddenanchor" id="tologin"></a>
+
+      <div id="wrapper">
+          <div id="login" class="animate form">
+              <section class="login_content">
+                  <form>
+                      <h1>Pocket Pointing</h1>
+                      {{> loginButtons}}
+
+                      <div class="clearfix"></div>
+                      <div class="separator">
+
+                      </div>
+                  </form>
+                  <!-- form -->
+              </section>
+              <!-- content -->
+          </div></div>
   </div>
-  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-    {{> loginButtons}}
-  </div>
+
+
+
 </template>

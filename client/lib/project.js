@@ -18,9 +18,3 @@ Template.submit_form.events({
     description = "";
   }
 });
-
-Template.project.events({
-  "click .delete": function () {
-    Meteor.call("deleteProject", this._id);
-  }
-});

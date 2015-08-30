@@ -3,49 +3,108 @@
 </template>
 
 <template name="dashboard_employees">
-  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-    <form class="new-employee">
-      <div class="mdl-textfield mdl-js-textfield textfield-demo">
-        <input class="mdl-textfield__input" type="text" name="name"  />
-        <label class="mdl-textfield__label">Funcionário</label>
+  <div class="row">
+    <div class="x_panel">
+
+      <div class="x_title">
+          <h2>Cadastro</h2>
+          <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                  </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+          </ul>
+          <div class="clearfix"></div>
       </div>
+      <div class="x_content">
+          <br>
+          <form class="form-horizontal form-label-left input_mask new-employee">
 
-      <br>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nome<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+            </div>
 
-      <div class="mdl-textfield mdl-js-textfield textfield-demo">
-        <input class="mdl-textfield__input" type="text" name="email"  />
-        <label class="mdl-textfield__label">Email</label>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" >Email<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" >Senha<span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" name="password" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+            </div>
+
+            <div class="ln_solid"></div>
+            <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                    <button type="button" class="btn btn-primary">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+            </div>
+
+          </form>
       </div>
-
-      <br>
-
-      <div class="mdl-textfield mdl-js-textfield textfield-demo">
-        <input class="mdl-textfield__input" type="password" name="password"  />
-        <label class="mdl-textfield__label">Senha (será modificada no login)</label>
-      </div>
-
-      <br>
-
-      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">
-        Salvar
-      </button>
-    </form>
+    </div>
   </div>
 
-  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mdl-cell--12-col">
-      <thead>
-        <tr>
-          <th>Funcionário</th>
-          <th>Email</th>
-          <th class="mdl-data-table__cell--non-numeric"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each employees}}
-          {{> list_employees}}
-        {{/each}}
-      </tbody>
-    </table>
+  <div class="row">
+    <div class="x_panel">
+      <div class="x_title">
+          <h2>Funcionários</h2>
+          <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                  </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+          </ul>
+          <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Funcionário</th>
+              <th>Email</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each employees}}
+              {{> list_employees}}
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+  </div>
+
   </div>
 </template>

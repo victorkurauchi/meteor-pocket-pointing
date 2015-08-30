@@ -1,15 +1,68 @@
-<template name="project">
-  <tr>
-    <td>{{name}}</td>
-    <td>{{description}}</td>
-    <td>{{company}}</td>
-    <td class="mdl-data-table__cell--non-numeric">
-      <button class="mdl-button mdl-js-button mdl-button--icon delete">
-        <i class="material-icons">delete</i>
-      </button>
-      <a href="/project/{{_id}}/appointments" class="mdl-button mdl-js-button mdl-button--icon view-appointments">
-        <i class="material-icons">schedule</i>
-      </a>
-    </td>
-  </tr>
+<template name="dashboard_main_content">
+  {{> company_form}}
+  {{> submit_form}}
+
+  <div class="row">
+    <div class="x_panel">
+      <div class="x_title">
+          <h2>Projetos ativos</h2>
+          <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                  </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+          </ul>
+          <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+
+        <table class="table">
+            <thead>
+                <tr class="headings">
+                    <th>
+                        <input type="checkbox" class="tableflat">
+                    </th>
+                    <th>Projeto</th>
+                    <th>Descrição</th>
+                    <th>Empresa</th>
+                    <th class="mdl-data-table__cell--non-numeric"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+              {{#each projects}}
+                <tr>
+                  <td class="a-center ">
+                      <input type="checkbox" class="tableflat">
+                  </td>
+                  <td>{{name}}</td>
+                  <td>{{description}}</td>
+                  <td>{{company}}</td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <button class="delete">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                    <a href="/project/{{_id}}/appointments" class="view-appointments">
+                      <i class="fa fa-clock-o"></i>
+                    </a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
+
 </template>

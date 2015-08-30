@@ -1,16 +1,5 @@
 Meteor.subscribe("employees");
 
-var _workedMonthly = 0;
-var calculateMonthly = function(timestamp) {
-  var _duration,
-    display;
-  _duration = _workedMonthly + timestamp;
-  _workedMonthly = moment.duration(_duration);
-
-  display = _workedMonthly.hours() + " horas e " + _workedMonthly.minutes() + " minutos";
-  Session.set("workedMonthly", display);
-};
-
 Template.dashboard_employees.helpers({
   employees: function() {
     return Employees.find({}, {sort: {name: 1}});
@@ -54,47 +43,8 @@ Template.user_calendar.onCreated(function() {
   });
 });
 
-Template.registerHelper('formatDate', function(date) {
-  if (date) {
-    return moment(date).format('DD/MM/YYYY HH:mm:ss');
-  } else {
-    return '';
-  }
-});
-
-Template.registerHelper('calculateWorkedHours', function(checkin, breakin, breakout, checkout) {
-  if (checkin && breakin && breakout && checkout) {
-    var sum,
-      tempTime,
-      total;
-
-    checkin = moment(checkin);
-    breakin = moment(breakin);
-    breakout = moment(breakout);
-    checkout = moment(checkout);
-
-    sum = checkout.diff(checkin);
-    sum = sum - (breakout.diff(breakin));
-    tempTime = moment.duration(sum);
-    total = tempTime.hours() + ":" + tempTime.minutes() + ":" + tempTime.seconds();
-
-    calculateMonthly(tempTime);
-
-    return total;
-  } else {
-    return 0;
-  }
-});
-
 Template.user_calendar.onRendered(function(){
-  _workedMonthly = 0;
-});
-
-Template.user_calendar.events({
-  'click button': function (event, template) {
-    // increment the counter when button is clicked
-    template.monthlyHours.set(template.monthlyHours.get() + 1);
-  }
+  Calculator.clearWorked();
 });
 
 Template.user_calendar.helpers({

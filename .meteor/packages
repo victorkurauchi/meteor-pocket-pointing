@@ -17,3 +17,4 @@ jparker:crypto-md5
 momentjs:moment
 email
 reactive-var
+ephemer:reactive-datatables
