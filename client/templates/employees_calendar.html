@@ -15,25 +15,20 @@
     }
   </style>
 
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col">
+  <div class="row">
       {{#if Template.subscriptionsReady}}
         {{#with employee}}
           <h2 class="mdl-card__title-text">Apontamentos {{name}}</h2>
-          <p>
-            {{currentMonth}}
-          </p>
         {{/with}}
       {{else}}
           <h2 class="mdl-card__title-text">Aguarde...</h2>
       {{/if}}
-    </div>
   </div>
 
   <div class="row">
     <div class="x_panel">
       <div class="x_title">
-          <h2>Projetos ativos</h2>
+          <h2>{{currentMonth}}</h2>
           <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -85,7 +80,12 @@
   </div>
 
   <div class="row">
-    <h5>Total trabalhado no mês até hoje: {{monthlyHours}}</h5>
+    <p class="pull-left">Total trabalhado no mês até hoje: {{monthlyHours}}</p>
+    <p class="pull-right">
+      <a class="btn btn-lg print-appointment">
+        <i class="fa fa-print"></i>
+      </a>
+    </p>
   </div>
 
 </template>

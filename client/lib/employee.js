@@ -35,7 +35,7 @@ Template.list_employees.events({
 
 Template.user_calendar.onCreated(function() {
   var self = this;
-  self.monthlyHours = new ReactiveVar(0);
+  self.userAppointment = new ReactiveVar(null);
   self.autorun(function() {
     var userid = FlowRouter.getParam('id');
     self.subscribe('singleEmployee', userid);
@@ -47,6 +47,28 @@ Template.user_calendar.onRendered(function(){
   Calculator.clearWorked();
 });
 
+Template.user_calendar.events({
+  "click .print-appointment": function(event, template) {
+    var data = [];
+    var appoint = template.userAppointment.get();
+
+    appoint.forEach(function(item) {
+      var transformed = {};
+      var BlazeHelper = Blaze._globalHelpers;
+      transformed['Checkin'] = BlazeHelper.formatDate(item.checkin);
+      transformed['Breakin'] = BlazeHelper.formatDate(item.breakin);
+      transformed['Breakout'] = BlazeHelper.formatDate(item.breakout);
+      transformed['Checkout'] = BlazeHelper.formatDate(item.checkout);
+      transformed['Total'] = BlazeHelper.calculateWorkedHours(item.checkin, item.breakin, item.breakout, item.checkout);
+      transformed['Projeto'] = item.projectName;
+
+      data.push(transformed);
+    });
+
+    Printer.toCSV(data);
+  }
+})
+
 Template.user_calendar.helpers({
   employee: function() {
     var userid = FlowRouter.getParam('id');
@@ -54,7 +76,9 @@ Template.user_calendar.helpers({
     return employee;
   },
   user_calendar_day: function() {
-    return Appointments.find({userId: FlowRouter.getParam('id')});
+    var appointments = Appointments.find({userId: FlowRouter.getParam('id')});
+    Template.instance().userAppointment.set(appointments);
+    return appointments;
   },
   currentMonth: function() {
     return moment().format('MMMM');

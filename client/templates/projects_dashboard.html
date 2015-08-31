@@ -34,7 +34,7 @@
                     <th>Projeto</th>
                     <th>Descrição</th>
                     <th>Empresa</th>
-                    <th class="mdl-data-table__cell--non-numeric"></th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -47,11 +47,11 @@
                   <td>{{name}}</td>
                   <td>{{description}}</td>
                   <td>{{company}}</td>
-                  <td class="mdl-data-table__cell--non-numeric">
-                    <button class="delete">
+                  <td>
+                    <a class="btn delete">
                       <i class="fa fa-trash-o"></i>
-                    </button>
-                    <a href="/project/{{_id}}/appointments" class="view-appointments">
+                    </a>
+                    <a href="/project/{{_id}}/appointments" class="btn view-appointments">
                       <i class="fa fa-clock-o"></i>
                     </a>
                   </td>
