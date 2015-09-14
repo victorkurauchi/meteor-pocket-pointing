@@ -1,7 +1,6 @@
 Template.dashboard.events({
   "click .logout": function() {
     Meteor.logout(function() {
-      console.log("wot ?");
       window.location.href = "/";
     });
   }
